@@ -1,13 +1,16 @@
 import SearchBar from './components/Header/Header';
 
-// import { useState } from 'react'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 
 import axios from 'axios';
 
 
 function App() {
+
+  const [photos, setPhotos] = useState([]);
+
+
 
   useEffect(()=>{
 
@@ -16,7 +19,7 @@ function App() {
         "https://api.unsplash.com/photos/?client_id=zEPdnHrUUl4l4s-30oNBr2tSssaoWd-jM1rJSftc68c"
       )
       console.log(response);
-      
+      setPhotos(response.data.photos);
 
     }
     fetchData();
@@ -27,9 +30,17 @@ function App() {
     <>
     <SearchBar/>
  
-<div>
-  !!!
-</div>
+{/* <div>
+  {photos.length > 0 && (
+    <ul>
+      {photos.map(({id,}))}
+      <li></li>
+    </ul>
+  )}
+
+
+
+</div> */}
     </>
   )
 }
