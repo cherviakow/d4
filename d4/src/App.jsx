@@ -1,46 +1,55 @@
 import SearchBar from './components/Header/Header';
+import {fetchData} from "../src/components/api";
 
 import { useEffect, useState } from 'react';
 import './App.css'
 
-import axios from 'axios';
+
 
 
 function App() {
-
+ 
   const [photos, setPhotos] = useState([]);
 
 
+  const handleSearch = 
 
   useEffect(()=>{
 
-    async function fetchData(){
-      const response = await axios.get(
-        "https://api.unsplash.com/photos/?client_id=zEPdnHrUUl4l4s-30oNBr2tSssaoWd-jM1rJSftc68c"
-      )
-      console.log(response);
-      setPhotos(response.data.photos);
+    async function gethData(){
+      try{
+        const fetchData = await fetchData();
+        setPhotos(fetchData);
+      } catch (error){
+        console.log(error, 'error');
+        
+      }
+      
 
     }
-    fetchData();
+    
 
   },[]);
 
   return (
     <>
-    <SearchBar/>
+    <SearchBar onSearch={handleSearch}/>
  
-{/* <div>
+<div>
   {photos.length > 0 && (
     <ul>
-      {photos.map(({id,}))}
-      <li></li>
+      {photos.map(({id, urls, alt_description}) => (
+       <li key={id}>
+        <img src={urls.small} alt={alt_description} />
+       </li> 
+      ))}
+      
     </ul>
   )}
 
 
 
-</div> */}
+</div>
     </>
   )
 }
