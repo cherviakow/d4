@@ -1,0 +1,12 @@
+.gallery{
+    display: flex;
+    width: 700px;
+    gap: 5px;
+}
+
+.picture{
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+    
+}
